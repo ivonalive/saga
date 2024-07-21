@@ -17,6 +17,19 @@ INSERT INTO "categories"
   ('whimsical');
 
 -- Favorites table:
+CREATE TABLE "favorites" (
+  "id" SERIAL PRIMARY KEY,
+  "url" VARCHAR (255) NOT NULL,
+  "title" VARCHAR (255) NOT NULL
+);
+
+-- Join table for favorite categories (many-to-many relationship):
+CREATE TABLE "favorite_categories" (
+  "id" SERIAL PRIMARY KEY,
+  "favorite_id" INTEGER NOT NULL REFERENCES "favorites"("id") ON DELETE CASCADE,
+  "category_id" INTEGER NOT NULL REFERENCES "categories"("id") ON DELETE CASCADE,
+  UNIQUE ("favorite_id", "category_id")
+);
 
 -- You'll need a "favorites" table for storing each instance of
 -- a Giphy image that has been "favorited."
