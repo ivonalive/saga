@@ -1,9 +1,9 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore } from 'redux';
 
 const initialState = {
   searchResults: [],
-  favorites: []
+  favorites: [],
+  categories: [] 
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -12,11 +12,13 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, searchResults: action.payload };
     case 'SET_FAVORITES':
       return { ...state, favorites: action.payload };
+    case 'SET_CATEGORIES':
+      return { ...state, categories: action.payload };
     default:
       return state;
   }
 };
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer);
 
 export default store;
